@@ -12,6 +12,15 @@ function App() {
   const [todos, setTodos] = useState([]);
   const [loading, setLoading] = useState(false);
 
+  useEffect(() => {
+    const loadData = async() => {
+      setLoading(true)
+      const res = await fetch(API+'/todos').then((rec) => rec.json()).catch((err) => {console.log(err)})
+      setLoading(false)
+
+    }
+  },[])
+
   const handleSubmit = async (e) => {
     e.preventDefault();
 
