@@ -90,7 +90,7 @@ function App() {
       </div>
       <div className="todo-list">
         <h2>Lista de Atividade</h2>
-        {<Load todos={todos} loading={loading}></Load>}
+        
         {todos.map((t) => (
           <div className="todo" key={t.id}>
             <p>{t.title}</p>

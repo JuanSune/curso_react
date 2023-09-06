@@ -1,13 +1,18 @@
 import styles from "./Load.module.css";
 
 function Load({ todos, loading }) {
-  let vr = "";
-  if (todos.length === 0 || todos.length < 0) {
-    vr = "Nao a atividades na lista";
-  } else if (todos.length > 0 && loading === true) {
-    vr = "Carregando atividades da lista";
+  let objRe = "";
+
+  if (loading === true){
+    objRe = 'Estamos carregando as informaçoes'
+
+  }
+  else{
+    objRe = todos
   }
 
-  return <p> {vr}</p>;
+  
+
+  return <p> {objRe}</p>;
 }
 export default Load;
