@@ -3,6 +3,7 @@ import "./App.css";
 import NovaIdade from "./components/NovaIdade";
 import { useState, useEffect } from "react";
 import { BsTrash, BsBookmarkCheck, BsBookmarkCheckFill } from "react-icons/bs";
+import Load from "./components/Load";
 
 const API = "http://localhost:5000";
 
@@ -12,14 +13,20 @@ function App() {
   const [todos, setTodos] = useState([]);
   const [loading, setLoading] = useState(false);
 
-  useEffect(() => {
-    const loadData = async() => {
-      setLoading(true)
-      const res = await fetch(API+'/todos').then((rec) => rec.json()).catch((err) => {console.log(err)})
-      setLoading(false)
+  const loadData = async () => {
+    setLoading(true);
+    const res = await fetch(API + "/todos")
+      .then((rec) => rec.json())
+      .catch((err) => {
+        console.log(err);
+      });
+    setLoading(false);
+    setTodos(res);
+  };
 
-    }
-  },[])
+  useEffect(() => {
+    loadData();
+  }, []);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -41,6 +48,7 @@ function App() {
 
     setTitle("");
     setTime("");
+    loadData();
   };
 
   return (
@@ -82,7 +90,12 @@ function App() {
       </div>
       <div className="todo-list">
         <h2>Lista de Atividade</h2>
-        {todos.length === 0 && <p>Não há tarefas</p>}
+        {<Load todos={todos} loading={loading}></Load>}
+        {todos.map((t) => (
+          <div className="todo" key={t.id}>
+            <p>{t.title}</p>
+          </div>
+        ))}
       </div>
     </div>
   );

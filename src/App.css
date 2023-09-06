@@ -10,6 +10,7 @@
   padding: 0.5em;
   border-bottom: 1px solid #2c3035;
   text-align: center;
+  margin: 0 2em;
 }
 
 .todo-header h1{
