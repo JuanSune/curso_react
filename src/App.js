@@ -3,7 +3,6 @@ import "./App.css";
 import NovaIdade from "./components/NovaIdade";
 import { useState, useEffect } from "react";
 import { BsTrash, BsBookmarkCheck, BsBookmarkCheckFill } from "react-icons/bs";
-import Load from "./components/Load";
 
 const API = "http://localhost:5000";
 
@@ -44,12 +43,18 @@ function App() {
       headers: { "Content-Type": "application/json" },
     });
 
+    setTodos((prevState) => [...prevState, todo])
+
+
     console.log(todo);
 
     setTitle("");
     setTime("");
     loadData();
   };
+
+  if(loading){}
+
 
   return (
     <div className="App">
@@ -90,7 +95,7 @@ function App() {
       </div>
       <div className="todo-list">
         <h2>Lista de Atividade</h2>
-        
+        {todos.length === 0 && <p>Nao ha tarefas</p>}
         {todos.map((t) => (
           <div className="todo" key={t.id}>
             <p>{t.title}</p>
