@@ -46,14 +46,25 @@ function App() {
     setTodos((prevState) => [...prevState, todo])
 
 
-    console.log(todo);
+    //console.log(todo);
 
     setTitle("");
     setTime("");
     loadData();
   };
 
-  if(loading){}
+  const deleteInfo =  async (id) => {
+    await fetch(API + "/todos/" + id, {
+      method: "DELETE"
+    });
+    setTodos((prevState) => prevState.filter((todo) => todo.id !== id ))
+  }
+
+  
+
+  if(loading){
+  return <p>Carregando...</p>
+  }
 
 
   return (
@@ -98,7 +109,14 @@ function App() {
         {todos.length === 0 && <p>Nao ha tarefas</p>}
         {todos.map((t) => (
           <div className="todo" key={t.id}>
-            <p>{t.title}</p>
+            <h3 className={ t.done ? 'todo-done' : ''}>{t.title}</h3>
+            <p>Duraçao: {t.time}</p>
+            <div className="actions">
+              <span>
+                {!t.done ? <BsBookmarkCheck></BsBookmarkCheck> : <BsBookmarkCheckFill></BsBookmarkCheckFill>}
+              </span>
+              <BsTrash onClick={() => deleteInfo(t.id)}></BsTrash>
+            </div>
           </div>
         ))}
       </div>

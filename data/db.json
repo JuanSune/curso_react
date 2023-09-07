@@ -1,16 +1,3 @@
 {
-  "todos": [
-    {
-      "id": 0.8917283649896106,
-      "title": "oi",
-      "time": "2",
-      "done": false
-    },
-    {
-      "id": 0.7739565787028901,
-      "title": "outro",
-      "time": "-3",
-      "done": false
-    }
-  ]
+  "todos": []
 }
